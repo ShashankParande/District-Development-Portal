@@ -1,0 +1,29 @@
+body{
+background:#e6e6e6;
+}
+.main
+{
+    background:white;
+    width:100%;
+    padding:60px;
+}
+.main1
+{
+    background:white;
+    width:30%;
+    padding:60px;
+}
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+  text-align: left;
+}
+#myBar{
+  width: 0%;
+  height: 30px;
+  background-color: #4CAF50;
+  text-align: center;
+  line-height: 30px;
+  color: white;
+}
+

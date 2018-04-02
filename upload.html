@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DISTRICT DEVELOPMENT PORTAL</title>    
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+    <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDMaFUBDHRTgpBZNfFOREsaTkVpAjw4Vso",
+    authDomain: "district-dp.firebaseapp.com",
+    databaseURL: "https://district-dp.firebaseio.com",
+    projectId: "district-dp",
+    storageBucket: "district-dp.appspot.com",
+    messagingSenderId: "590171311016"
+  };
+  firebase.initializeApp(config);
+  
+  
+  </script>
+  
+<script>
+function loadFile(input) {
+
+        //Step 1 : Defining element to show the progress
+        var elem = document.getElementById("myBar");    
+        var filetoUpload=input.files[0];
+
+        //Step 2 : Initializing the reference of database with the filename
+        var storageRef = firebase.storage().ref(filetoUpload.name);
+        //Step 3 : Uploading file
+         var task = storageRef.put(filetoUpload);
+        
+        //Step 4 : sata_changed Event
+         // state_changed events occures when file is getting uploaded 
+         //(Note : when we want to show the progress what's the uploading status that time we will use this function.)
+         task.on('state_changed',
+            function progress(snapshot){
+                var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+                //uploader.value = percentage;
+                 elem.style.width = parseInt(percentage) + '%'; 
+                 elem.innerHTML=parseInt(percentage)+'%';
+            },
+            function error(err){
+
+            },
+            function complete(){
+                var downloadURL = task.snapshot.downloadURL;
+            }
+        ); 
+}
+</script>
+  
+   <center>
+   <div class="main1">
+    <p><h1> <span style="color:#e65c00;">CHOOSE THE REPORT TO BE UPLOADED</span></h1></p>
+	<p><h2> <span style="color:#2CB784;">Please upload the file with name</SPAN> <span style="color:#F14B29;">DID_PSN_YOURNAME</span> <span style="color:#2CB784;">eg:12_2_XYZ</span></h2></p>
+	<p><h3>PSN : PROBLEM STATEMENT NUMBER</h3></p>
+	<P><h3>DID : DEPARTMENT IDENTIFICATION NUMBER</h3></p>
+    <p>&nbsp;</p>
+    <input type="file" class="upload" id="upload_file" size="50" name="icon" onchange="loadFile(this);" >
+    <hr>
+    <div id="myProgress">
+        <div id="myBar"></div>
+    </div>
+
+</div>
+
+	<div>
+	    <a href="index1.html">
+		<button>BACK</button>
+	</a></div>
+	</center>
+</body>
+</html> 
